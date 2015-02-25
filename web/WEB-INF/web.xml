@@ -3,4 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <servlet>
+        <servlet-name>Car</servlet-name>
+        <servlet-class>cz.carsharing.servlet.CarServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Car</servlet-name>
+        <url-pattern>/Car</url-pattern>
+    </servlet-mapping>
 </web-app>

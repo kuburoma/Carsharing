@@ -5,6 +5,8 @@ package cz.carsharing.entities;
  */
 public class Truck extends Vehicle {
 
+    private static final long serialVersionUID = 1233214432L;
+
     private int numberOfWheels;
 
     public int getNumberOfWheels() {

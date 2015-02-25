@@ -11,7 +11,6 @@ public abstract class Vehicle implements Serializable {
 
     private String name;
     private String type;
-    private String color;
 
     public String getName() {
         return name;
@@ -29,11 +28,4 @@ public abstract class Vehicle implements Serializable {
         this.type = type;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 }
