@@ -16,4 +16,9 @@ public class Truck extends Vehicle {
     public void setNumberOfWheels(int numberOfWheels) {
         this.numberOfWheels = numberOfWheels;
     }
+
+    @Override
+    public String toString() {
+        return name +" "+type+" "+numberOfWheels;
+    }
 }

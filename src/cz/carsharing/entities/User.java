@@ -1,9 +1,11 @@
 package cz.carsharing.entities;
 
+import cz.carsharing.serializer.GetID;
+
 import java.io.Serializable;
 import java.util.UUID;
 
-public class User implements Serializable{
+public class User implements Serializable, GetID{
 
     private static final long serialVersionUID = 123321L;
 
@@ -33,5 +35,10 @@ public class User implements Serializable{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return firstName +" "+lastName;
     }
 }
