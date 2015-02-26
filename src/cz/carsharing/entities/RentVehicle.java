@@ -4,11 +4,13 @@ import cz.carsharing.serializer.GetID;
 
 import java.io.Serializable;
 
-public class RentCar implements Serializable, GetID{
+public class RentVehicle implements Serializable, GetID{
+
+    private static final long serialVersionUID = 7353214432L;
 
     private String id;
     private String user;
-    private String car;
+    private String vehicle;
 
     @Override
     public String getId() {
@@ -27,11 +29,11 @@ public class RentCar implements Serializable, GetID{
         this.user = user;
     }
 
-    public String getCar() {
-        return car;
+    public String getVehicle() {
+        return vehicle;
     }
 
-    public void setCar(String car) {
-        this.car = car;
+    public void setVehicle(String vehicle) {
+        this.vehicle = vehicle;
     }
 }

@@ -5,12 +5,12 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>car</servlet-name>
+        <servlet-name>vehicle</servlet-name>
         <servlet-class>cz.carsharing.servlet.CarServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>car</servlet-name>
-        <url-pattern>/car</url-pattern>
+        <servlet-name>vehicle</servlet-name>
+        <url-pattern>/vehicle</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>user</servlet-name>
@@ -27,5 +27,13 @@
     <servlet-mapping>
         <servlet-name>truck</servlet-name>
         <url-pattern>/truck</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>rentVehicle</servlet-name>
+        <servlet-class>cz.carsharing.servlet.RentVehicleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>rentVehicle</servlet-name>
+        <url-pattern>/rentVehicle</url-pattern>
     </servlet-mapping>
 </web-app>

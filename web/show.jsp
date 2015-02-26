@@ -44,7 +44,7 @@
             <%
                 for(Car car : cars){
             %>
-            <%= car.toString()%> <br>
+            <%= vehicle.toString()%> <br>
             <%
                 }
             %>
