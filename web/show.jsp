@@ -29,7 +29,7 @@
 <table>
     <tr>
         <td>
-            Auta
+            Roman smrdi
         </td>
         <td>
             Náklaďáky

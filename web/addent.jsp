@@ -77,17 +77,10 @@
     </form>
 </table>
 <table frame="hsides">
-    <tr>
-        <td>Uživatel jsi půjčí auto</td>
-    </tr>
-    <tr>
-        <td>Uživatel</td>
-        <td>Auto</td>
-    </tr>
     <form action="user" method="post">
         <tr>
 
-            <%
+                <%
                 Serializer<Vehicle,String> vehicleSerializer = new Serializer<Vehicle,String>(ServerConstants.vehicleDatabase);
                 Serializer<User,String> userSerializer = new Serializer<User,String>(ServerConstants.userDatabase);
                 List<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -95,43 +88,36 @@
                 vehicles.addAll(vehicleSerializer.findAll());
                 users.addAll(userSerializer.findAll());
             %>
+        <tr>
+            <td>
+                Vozidla
+            </td>
+            <td>
+                Uživatel
+            </td>
+        </tr>
+        <tr>
+            <td>
 
-            <table>
-                <tr>
-                    <td>
-                        Vozidla
-                    </td>
-                    <td>
-                        Uživatel
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <%
-                            for(Vehicle vehicle : vehicles){
-                        %>
-                        <%= vehicle.toString()%> <br>
-                        <%
-                            }
-                        %>
-
-                    </td>
-                    <td>
-                        <%
-                            for(User user : users){
-                        %>
-                        <%= user.toString()%> <br>
-                        <%
-                            }
-                        %>
-                    </td>
-                </tr>
-            </table>
-
-            <td><input type="text" name="firstName"></td>
-            <td><input type="text" name="lastName"></td>
-            <td><input type="submit" value="Submit"/></td>
+                <%
+                    for (Vehicle vehicle : vehicles) {
+                %>
+                <%= vehicle.toString()%><br>
+                <%
+                    }
+                %>
+            </td>
+            <td>
+                <%
+                    for (User user : users) {
+                %>
+                <%= user.toString()%><br>
+                <%
+                    }
+                %>
+                <br>
+            </td>
+        </tr>
         </tr>
     </form>
 </table>
