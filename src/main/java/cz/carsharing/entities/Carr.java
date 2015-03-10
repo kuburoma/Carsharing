@@ -4,7 +4,7 @@ package cz.carsharing.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "carrit")
+@Table(name = "Carr")
 public class Carr  {
 
     private Long id;
@@ -17,7 +17,7 @@ public class Carr  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -40,5 +40,10 @@ public class Carr  {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return id+" "+name +" "+type;
     }
 }

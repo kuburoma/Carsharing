@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -16,21 +17,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.8.2.2</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!--
-           an slf4j implementation is needed by
-           hibernate so that it could log its *stuff*
-        -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.4</version>
-            <scope>runtime</scope>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.8.7</version>
         </dependency>
     </dependencies>
 

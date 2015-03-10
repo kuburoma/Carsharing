@@ -5,12 +5,12 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>vehicle</servlet-name>
+        <servlet-name>car</servlet-name>
         <servlet-class>cz.carsharing.servlet.CarServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>vehicle</servlet-name>
-        <url-pattern>/vehicle</url-pattern>
+        <servlet-name>car</servlet-name>
+        <url-pattern>/car</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>user</servlet-name>

@@ -1,6 +1,8 @@
 package cz.carsharing.servlet;
 
+import cz.carsharing.dao.GenericDaoImpl;
 import cz.carsharing.entities.Car;
+import cz.carsharing.entities.Carr;
 import cz.carsharing.serializer.Serializer;
 
 import javax.servlet.ServletException;
@@ -15,12 +17,12 @@ public class CarServlet extends HttpServlet {
     Serializer<Car,String> serializer = new Serializer<Car, String>("Vehicle");
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Car car = new Car();
+        Carr car = new Carr();
         car.setName(request.getParameter("name"));
         car.setType(request.getParameter("type"));
-        car.setId(UUID.randomUUID().toString());
-        serializer.create(car);
+        System.out.println("ahoj");
 
-        response.sendRedirect("/show.jsp");
+        GenericDaoImpl<Carr, Long> carrGenericDao = new GenericDaoImpl<Carr, Long>();
+        carrGenericDao.create(car);
     }
 }
