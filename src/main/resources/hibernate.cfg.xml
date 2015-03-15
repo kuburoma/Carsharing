@@ -14,6 +14,8 @@
         <!-- DB schema will be updated if needed -->
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="cz.carsharing.entities.Carr" />
+        <mapping class="cz.carsharing.entities.Car" />
+        <mapping class="cz.carsharing.entities.Truck" />
+        <mapping class="cz.carsharing.entities.Vehicle" />
     </session-factory>
 </hibernate-configuration>

@@ -13,16 +13,16 @@ import java.util.UUID;
 
 public class TruckServlet extends HttpServlet {
 
-    Serializer<Truck,String> serializer = new Serializer<Truck, String>("Vehicle");
+    //Serializer<Truck,String> serializer = new Serializer<Truck, String>("Vehicle");
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Truck truck = new Truck();
+      /*  Truck truck = new Truck();
         truck.setName(request.getParameter("name"));
         truck.setType(request.getParameter("type"));
         truck.setNumberOfWheels(Integer.valueOf(request.getParameter("numberOfWheels")));
         truck.setId(UUID.randomUUID().toString());
         serializer.create(truck);
 
-        response.sendRedirect("/show.jsp");
+        response.sendRedirect("/show.jsp");*/
     }
 }

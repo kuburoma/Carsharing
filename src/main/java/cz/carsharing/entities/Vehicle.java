@@ -1,17 +1,18 @@
 package cz.carsharing.entities;
 
 import cz.carsharing.serializer.GetID;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Nell-NTB on 25.2.2015.
- */
-public abstract class Vehicle implements Serializable, GetID {
+@MappedSuperclass
+public abstract class Vehicle {
 
     private static final long serialVersionUID = 12345678L;
 
-    protected String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    protected Long id;
     protected String name;
     protected String type;
 
@@ -19,11 +20,11 @@ public abstract class Vehicle implements Serializable, GetID {
         return serialVersionUID;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

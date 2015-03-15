@@ -26,6 +26,7 @@
         <tr>
             <td><input type="text" name="name"></td>
             <td><input type="text" name="type"></td>
+            <td><input type="text" name="doors"/></td>
             <td><input type="submit" value="Submit"/></td>
         </tr>
     </form>
@@ -34,40 +35,40 @@
 <br>
 
 <table frame="hsides">
-        <tr>
+    <tr>
 
-            <%
-                GenericDaoImpl<Carr, Long> carrGenericDao = new GenericDaoImpl<Carr, Long>();
-                List<Carr> carrs = new ArrayList<Carr>();
-                carrs.addAll(carrGenericDao.findAll());
+        <%
+            GenericDaoImpl<Car, Long> carGenericDao = new GenericDaoImpl<Car, Long>(Car.class);
+            List<Car> cars = new ArrayList<Car>();
+            cars.addAll(carGenericDao.findAll());
 
-            %>
+        %>
 
-            <table>
-                <tr>
-                    <td>
-                        Vozidla
-                    </td>
-                    <td>
-                        Uživatel
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+        <table>
+            <tr>
+                <td>
+                    Vozidla
+                </td>
+                <td>
+                    Uživatel
+                </td>
+            </tr>
+            <tr>
+                <td>
 
-                        <%
-                            for(Carr carr : carrs){
-                        %>
-                        <%= carr.toString()%> <br>
-                        <%
-                            }
-                        %>
+                    <%
+                        for (Car car : cars) {
+                    %>
+                    <%= car.toString()%> <br>
+                    <%
+                        }
+                    %>
 
-                    </td>
-                </tr>
-            </table>
+                </td>
+            </tr>
+        </table>
 
-        </tr>
+    </tr>
 </table>
 
 

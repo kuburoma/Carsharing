@@ -15,6 +15,12 @@ import java.util.List;
  */
 public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,PK> {
 
+    public GenericDaoImpl(Class entityClass){
+        this.entityClass = entityClass;
+    }
+
+    private Class entityClass;
+
     @Override
     public T find(PK id) {
 
@@ -26,8 +32,9 @@ public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,P
     public List<T> findAll() {
         Session session = HibernateUtil.currentSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Carr");
-        List<T> objects = query.list();
+        Criteria criteria = session.createCriteria(entityClass);
+
+        List<T> objects = criteria.list();
         tx.commit();
         return objects;
     }
@@ -40,6 +47,7 @@ public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,P
         PK pk = (PK) session.save(object);
         session.flush();
         tx.commit();
+        session.close();
         return pk;
     }
 

@@ -1,8 +1,10 @@
 package cz.carsharing.entities;
 
-/**
- * Created by Nell-NTB on 25.2.2015.
- */
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "truck")
 public class Truck extends Vehicle {
 
     private static final long serialVersionUID = 1233214432L;

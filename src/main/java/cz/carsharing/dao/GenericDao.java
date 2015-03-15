@@ -8,6 +8,7 @@ import java.util.List;
  */
 public interface GenericDao<T, PK extends Serializable>  {
 
+
     T find(PK id);
     List<T> findAll();
     PK create(T object);

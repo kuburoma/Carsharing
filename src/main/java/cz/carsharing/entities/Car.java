@@ -1,16 +1,27 @@
 package cz.carsharing.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by Nell-NTB on 25.2.2015.
- */
+@Entity
+@Table(name = "car")
 public class Car extends Vehicle implements Serializable {
 
     private static final long serialVersionUID = 12332122L;
 
+    private int numberOfDoors;
+
+    public int getNumberOfDoors() {
+        return numberOfDoors;
+    }
+
+    public void setNumberOfDoors(int numberOfDoors) {
+        this.numberOfDoors = numberOfDoors;
+    }
+
     @Override
     public String toString() {
-        return name +" "+type;
+        return name +" "+type+" "+ numberOfDoors;
     }
 }
