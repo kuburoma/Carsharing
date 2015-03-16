@@ -18,7 +18,9 @@ import java.util.List;
  */
 public class StateDaoTest {
     StateDao stateDao;
+    UserDao userDao;
     Long stateId;
+    Long userId;
 
     State state;
     Company company;
@@ -30,6 +32,7 @@ public class StateDaoTest {
     @Before
     public void setUp() throws Exception {
         stateDao = new StateDao();
+        userDao = new UserDao();
 
         user = new User();
         user.setFirstName("Pepa");
@@ -63,29 +66,53 @@ public class StateDaoTest {
     public void userDaoTest() {
         saveUser();
         findUser();
-        //deleteUser();
+        saveState();
+        findState();
+        findStateByName();
+        deleteState();
     }
 
     public void saveUser() {
+        userId = userDao.create(user);
+
+        Assert.assertNotNull("Neziskal jsem id uloženého statu", userId);
+    }
+
+    public void findUser() {
+        User findUser = userDao.find(userId);
+
+        Assert.assertEquals("First name se neschoduje", user.getFirstName(), findUser.getFirstName());
+        Assert.assertEquals("last name se neschoduje", user.getLastName(), findUser.getLastName());
+    }
+
+    public void saveState() {
         stateId = stateDao.create(state);
 
         Assert.assertNotNull("Neziskal jsem id uloženého statu", stateId);
     }
 
 
-    public void findUser() {
+    public void findState() {
         State findState = stateDao.find(stateId);
 
         Assert.assertEquals("First name se neschoduje", user.getFirstName(), findState.getCompanies().get(0).getDepartments().get(0).getUsers().get(0).getFirstName());
         Assert.assertEquals("last name se neschoduje", user.getLastName(), findState.getCompanies().get(0).getDepartments().get(0).getUsers().get(0).getLastName());
     }
 
+    public void findStateByName(){
+        List<State> findStates = stateDao.findByName("Česká republika");
+        Assert.assertNotNull("Státy jsou Null", findStates);
+        Assert.assertTrue("Nenašel jsem Žádné státy", findStates.size() != 0);
+    }
 
-   /* public void deleteUser() {
-        userDao.delete(userId);
+    public void deleteState(){
+        stateDao.delete(stateId);
+
+        State findState = stateDao.find(stateId);
         User findUser = userDao.find(userId);
 
+        Assert.assertNull("State je stále v databázi", findState);
         Assert.assertNull("Uživatel je stále v databázi", findUser);
-    }*/
+    }
 
 }

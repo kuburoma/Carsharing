@@ -34,11 +34,10 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
         Session session = HibernateUtil.currentSession();
         Transaction tx = null;
         try {
-            session.beginTransaction();
+            tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(entityClass);
             List<T> objects = criteria.list();
             tx.commit();
-            session.close();
             return objects;
         } catch (HibernateException e) {
             tx.rollback();
