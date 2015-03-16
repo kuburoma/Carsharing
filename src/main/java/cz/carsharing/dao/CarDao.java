@@ -10,4 +10,6 @@ public class CarDao extends GenericDaoImpl<Car,Long> {
         super(Car.class);
     }
 
+
+
 }

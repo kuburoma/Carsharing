@@ -1,23 +1,32 @@
 package cz.carsharing.entities;
 
-import cz.carsharing.serializer.GetID;
+import javax.persistence.*;
+import java.util.List;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-public class User implements Serializable, GetID{
+@Entity
+@Table(name = "user")
+public class User{
 
     private static final long serialVersionUID = 123321L;
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     private String firstName;
     private String lastName;
 
-    public String getId() {
+    @ManyToOne
+    private Department department;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Vehicle> rentVehicles;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,6 +44,14 @@ public class User implements Serializable, GetID{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Vehicle> getRentVehicles() {
+        return rentVehicles;
+    }
+
+    public void setRentVehicles(List<Vehicle> rentVehicles) {
+        this.rentVehicles = rentVehicles;
     }
 
     @Override

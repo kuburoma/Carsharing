@@ -1,11 +1,7 @@
 package cz.carsharing.dao;
 
-import cz.carsharing.entities.Carr;
 import cz.carsharing.utilities.HibernateUtil;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,9 +9,9 @@ import java.util.List;
 /**
  * Created by Nell on 25.2.2015.
  */
-public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,PK> {
+public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
 
-    public GenericDaoImpl(Class entityClass){
+    public GenericDaoImpl(Class entityClass) {
         this.entityClass = entityClass;
     }
 
@@ -23,32 +19,48 @@ public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,P
 
     @Override
     public T find(PK id) {
-
-
-        return null;
+        Session session = HibernateUtil.currentSession();
+        try {
+            T object = (T) session.get(entityClass, id);
+            return object;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public List<T> findAll() {
         Session session = HibernateUtil.currentSession();
-        Transaction tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(entityClass);
-
-        List<T> objects = criteria.list();
-        tx.commit();
-        return objects;
+        Transaction tx = null;
+        try {
+            session.beginTransaction();
+            Criteria criteria = session.createCriteria(entityClass);
+            List<T> objects = criteria.list();
+            tx.commit();
+            session.close();
+            return objects;
+        } catch (HibernateException e) {
+            tx.rollback();
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public PK create(T object) {
         Session session = HibernateUtil.currentSession();
         Transaction tx = null;
-        tx = session.beginTransaction();
-        PK pk = (PK) session.save(object);
-        session.flush();
-        tx.commit();
-        session.close();
-        return pk;
+        try {
+            tx = session.beginTransaction();
+            PK pk = (PK) session.save(object);
+            tx.commit();
+            return pk;
+        } catch (HibernateException e) {
+            tx.rollback();
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -57,8 +69,18 @@ public class GenericDaoImpl<T,PK extends Serializable> implements GenericDao<T,P
     }
 
     @Override
-    public void delete(T object) {
-
+    public void delete(PK id) {
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            T object = (T) session.get(entityClass, id);
+            session.delete(object);
+            tx.commit();
+        } catch (HibernateException e) {
+            tx.rollback();
+            e.printStackTrace();
+        }
     }
 }
 

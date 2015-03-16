@@ -17,5 +17,9 @@
         <mapping class="cz.carsharing.entities.Car" />
         <mapping class="cz.carsharing.entities.Truck" />
         <mapping class="cz.carsharing.entities.Vehicle" />
+        <mapping class="cz.carsharing.entities.User" />
+        <mapping class="cz.carsharing.entities.Department" />
+        <mapping class="cz.carsharing.entities.Company" />
+        <mapping class="cz.carsharing.entities.State" />
     </session-factory>
 </hibernate-configuration>

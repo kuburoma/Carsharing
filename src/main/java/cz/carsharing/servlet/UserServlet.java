@@ -13,15 +13,14 @@ import java.util.UUID;
 
 public class UserServlet extends HttpServlet {
 
-    Serializer<User,String> serializer = new Serializer<User, String>("User");
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
+/*        User user = new User();
         user.setFirstName(request.getParameter("firstName"));
         user.setLastName(request.getParameter("lastName"));
         user.setId(UUID.randomUUID().toString());
         serializer.create(user);
 
-        response.sendRedirect("/show.jsp");
+        response.sendRedirect("/show.jsp");*/
     }
 }

@@ -1,20 +1,23 @@
 package cz.carsharing.entities;
 
-import cz.carsharing.serializer.GetID;
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Vehicle {
 
     private static final long serialVersionUID = 12345678L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     protected Long id;
     protected String name;
     protected String type;
+
+    @ManyToMany(mappedBy = "rentVehicles")
+    protected List<User> users;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -42,6 +45,14 @@ public abstract class Vehicle {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

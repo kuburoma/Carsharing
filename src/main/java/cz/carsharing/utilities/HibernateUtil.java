@@ -23,6 +23,10 @@ public class HibernateUtil {
 
     public static final ThreadLocal session = new ThreadLocal();
 
+    public static Session openSession() throws HibernateException {
+        return sessionFactory.openSession();
+    }
+
     public static Session currentSession() throws HibernateException {
         Session s = (Session) session.get();
         // Open a new Session, if this thread has none yet
