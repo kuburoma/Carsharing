@@ -17,20 +17,11 @@ public class StateDao extends GenericDaoImpl<State,Long> {
     }
 
     public List<State> findByName(String findName) {
-        Session session = HibernateUtil.currentSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Property name = Property.forName("name");
-            Criteria criteria = session.createCriteria(State.class).add(name.eq(findName));
-            List<State> objects = criteria.list();
-            tx.commit();
-            return objects;
-        } catch (HibernateException e) {
-            tx.rollback();
-            e.printStackTrace();
-            return null;
-        }
+        return this.findBy("name", findName);
+    }
+
+    public List<State> findByCurrency(String findCurrency) {
+        return this.findBy("currency", findCurrency);
     }
 
 

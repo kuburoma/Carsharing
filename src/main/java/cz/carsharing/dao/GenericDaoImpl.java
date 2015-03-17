@@ -1,7 +1,10 @@
 package cz.carsharing.dao;
 
+import cz.carsharing.entities.State;
 import cz.carsharing.utilities.HibernateUtil;
 import org.hibernate.*;
+import org.hibernate.criterion.Property;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -32,18 +35,17 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
     @Override
     public List<T> findAll() {
         Session session = HibernateUtil.currentSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Criteria criteria = session.createCriteria(entityClass);
-            List<T> objects = criteria.list();
-            tx.commit();
-            return objects;
-        } catch (HibernateException e) {
-            tx.rollback();
-            e.printStackTrace();
-            return null;
-        }
+        Criteria criteria = session.createCriteria(entityClass);
+        List<T> objects = criteria.list();
+        return objects;
+    }
+
+    public List<T> findBy(String columnName, String name) {
+        Session session = HibernateUtil.currentSession();
+        Property column = Property.forName(columnName);
+        Criteria criteria = session.createCriteria(entityClass).add(column.eq(name));
+        List<T> objects = criteria.list();
+        return objects;
     }
 
     @Override
@@ -64,7 +66,16 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
 
     @Override
     public void update(T object) {
-
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.update(object);
+            tx.commit();
+        } catch (HibernateException e) {
+            tx.rollback();
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -81,5 +92,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
             e.printStackTrace();
         }
     }
+
+
 }
 
