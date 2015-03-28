@@ -11,7 +11,6 @@ public abstract class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
     protected Long id;
     protected String name;
     protected String type;

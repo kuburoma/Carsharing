@@ -14,12 +14,11 @@ public class State {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     private String name;
     private String currency;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "state")
+    @OneToMany(mappedBy = "state")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<Company> companies;
 

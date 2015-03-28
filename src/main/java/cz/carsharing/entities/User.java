@@ -4,22 +4,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "userTable")
 public class User{
-
-    private static final long serialVersionUID = 123321L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
+
     private String firstName;
     private String lastName;
 
     @ManyToOne
+    @JoinColumn(name = "departmentId")
     private Department department;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     private List<Vehicle> rentVehicles;
 
     public Long getId() {
@@ -44,6 +43,14 @@ public class User{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public List<Vehicle> getRentVehicles() {

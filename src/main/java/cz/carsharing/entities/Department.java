@@ -2,6 +2,7 @@ package cz.carsharing.entities;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.IndexColumn;
 
 
 import javax.persistence.*;
@@ -13,17 +14,15 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     private String name;
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    @OneToMany(mappedBy = "department")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<User> users;
 
     @ManyToOne
-    @Cascade({CascadeType.SAVE_UPDATE})
     private Company company;
 
     public Long getId() {
@@ -56,6 +55,14 @@ public class Department {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     @Override

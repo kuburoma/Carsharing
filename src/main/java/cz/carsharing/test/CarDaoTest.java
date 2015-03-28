@@ -27,8 +27,8 @@ public class CarDaoTest {
     @Test
     public void carDaoTest() {
         saveCar();
-        findCar();
-        deleteCar();
+        //findCar();
+        //deleteCar();
     }
 
     public void saveCar() {

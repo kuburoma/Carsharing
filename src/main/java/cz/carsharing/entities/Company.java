@@ -14,18 +14,16 @@ public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     private String name;
     private String motto;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    @OneToMany(mappedBy = "company")
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<Department> departments;
 
-    @ManyToOne
-    @Cascade({CascadeType.SAVE_UPDATE})
+    @ManyToOne(fetch = FetchType.EAGER)
     private State state;
 
     public Long getId() {
@@ -58,6 +56,14 @@ public class Company {
 
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     @Override
