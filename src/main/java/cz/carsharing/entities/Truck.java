@@ -21,6 +21,12 @@ public class Truck extends Vehicle {
 
     @Override
     public String toString() {
-        return name +" "+type+" "+numberOfWheels;
+        StringBuffer sb = new StringBuffer();
+        sb.append("---- Truck -----\n");
+        sb.append("Name: "+name+"\n");
+        sb.append("Type: "+type+"\n");
+        sb.append("wheels: "+numberOfWheels+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }

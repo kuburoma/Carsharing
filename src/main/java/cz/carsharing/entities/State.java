@@ -6,6 +6,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class State {
     private String currency;
 
     @OneToMany(mappedBy = "state")
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade({CascadeType.ALL})
     private List<Company> companies;
 
     public Long getId() {
@@ -54,8 +55,23 @@ public class State {
         this.companies = companies;
     }
 
+    @Transient
+    public void addCompany(Company company) {
+        if(this.companies == null){
+            this.companies = new ArrayList<Company>();
+        }
+        this.companies.add(company);
+    }
+
+
+
     @Override
     public String toString() {
-        return "";
+        StringBuffer sb = new StringBuffer();
+        sb.append("---- State -----\n");
+        sb.append("Name: "+name+"\n");
+        sb.append("Currency: "+currency+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }

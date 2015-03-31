@@ -1,6 +1,11 @@
 package cz.carsharing.entities;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,11 +19,12 @@ public class User{
     private String firstName;
     private String lastName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departmentId")
     private Department department;
 
     @ManyToMany
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private List<Vehicle> rentVehicles;
 
     public Long getId() {
@@ -61,8 +67,21 @@ public class User{
         this.rentVehicles = rentVehicles;
     }
 
+    @Transient
+    public void addRentVehicle(Vehicle rentVehicle) {
+        if(this.rentVehicles == null){
+            this.rentVehicles = new ArrayList<Vehicle>();
+        }
+        this.rentVehicles.add(rentVehicle);
+    }
+
     @Override
     public String toString() {
-        return firstName +" "+lastName;
+        StringBuffer sb = new StringBuffer();
+        sb.append("----- User -----\n");
+        sb.append("firstName: "+firstName+"\n");
+        sb.append("lastName: "+lastName+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }

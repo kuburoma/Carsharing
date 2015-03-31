@@ -22,6 +22,12 @@ public class Car extends Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return name +" "+type+" "+ numberOfDoors;
+        StringBuffer sb = new StringBuffer();
+        sb.append("----- Car ------\n");
+        sb.append("Name: "+name+"\n");
+        sb.append("Type: "+type+"\n");
+        sb.append("doors: "+numberOfDoors+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }

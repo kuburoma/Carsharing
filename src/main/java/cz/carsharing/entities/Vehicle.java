@@ -1,6 +1,7 @@
 package cz.carsharing.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,6 +53,14 @@ public abstract class Vehicle {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Transient
+    public void addUser(User user) {
+        if(this.users == null){
+            this.users = new ArrayList<User>();
+        }
+        this.users.add(user);
     }
 
     @Override

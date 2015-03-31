@@ -6,6 +6,7 @@ import org.hibernate.annotations.IndexColumn;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,10 @@ public class Department {
     private String email;
 
     @OneToMany(mappedBy = "department")
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade({CascadeType.ALL})
     private List<User> users;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Company company;
 
     public Long getId() {
@@ -57,6 +58,14 @@ public class Department {
         this.users = users;
     }
 
+    @Transient
+    public void addUser(User user) {
+        if(this.users == null){
+            this.users = new ArrayList<User>();
+        }
+        this.users.add(user);
+    }
+
     public Company getCompany() {
         return company;
     }
@@ -67,6 +76,11 @@ public class Department {
 
     @Override
     public String toString() {
-        return "";
+        StringBuffer sb = new StringBuffer();
+        sb.append("-- Department --\n");
+        sb.append("Name: "+name+"\n");
+        sb.append("Email: "+email+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Company {
 
 
     @OneToMany(mappedBy = "company")
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade({CascadeType.ALL})
     private List<Department> departments;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -58,6 +59,14 @@ public class Company {
         this.departments = departments;
     }
 
+    @Transient
+    public void addDepartment(Department department) {
+        if(this.departments == null){
+            this.departments = new ArrayList<Department>();
+        }
+        this.departments.add(department);
+    }
+
     public State getState() {
         return state;
     }
@@ -68,6 +77,11 @@ public class Company {
 
     @Override
     public String toString() {
-        return "";
+        StringBuffer sb = new StringBuffer();
+        sb.append("--- Company ----\n");
+        sb.append("Name: "+name+"\n");
+        sb.append("Motto: "+motto+"\n");
+        sb.append("----------------");
+        return sb.toString();
     }
 }
